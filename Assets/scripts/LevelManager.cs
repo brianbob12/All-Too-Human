@@ -15,23 +15,23 @@ public class LevelManager : MonoBehaviour {
     private bool waveOn = false;//whether or not a wave is currently active
 
     //getters and setters
-    int getScore() { return this.score; }
-    int getMoney() { return this.money; }
-    int getWave() { return this.wave; }
-    bool getWifi() { return this.wifi; }
-    bool getWaveOn() { return this.waveOn; }
+    public int getScore() { return this.score; }
+    public int getMoney() { return this.money; }
+    public int getWave() { return this.wave; }
+    public bool getWifi() { return this.wifi; }
+    public bool getWaveOn() { return this.waveOn; }
 
-    void addScore(int tad) { this.score += tad; }
-    void addMoney(int tad) { this.money += tad; }
-    void setWifi(bool status) { this.wifi = status; }
-    void takeMoney(int ttk) {//removes given value from money stopping at zero
+    public void addScore(int tad) { this.score += tad; }
+    public void addMoney(int tad) { this.money += tad; }
+    public void setWifi(bool status) { this.wifi = status; }
+    public void takeMoney(int ttk) {//removes given value from money stopping at zero
         this.money -= ttk;
         if (this.money < 0) {
             this.money = 0;
         }
     }
 
-    bool enoughMoney(int price) {//checks if there is enough money to pay for price
+    public bool enoughMoney(int price) {//checks if there is enough money to pay for price
         if (price > this.money) {
             return false;
         }
