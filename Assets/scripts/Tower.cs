@@ -132,4 +132,26 @@ public class Tower : MonoBehaviour {
         }
     }
 
+    //manage enemeis list
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.GetComponent<Enemy>()!=null) {
+            //collision with enemy
+            //add object to enemies
+            enemies.Add(collider.gameObject.GetComponent<Enemy>());
+            Debug.Log("enter");
+            
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collider)
+    {
+        if (collider.gameObject.GetComponent<Enemy>() != null)
+        {
+            //collision with enemy
+            //add object to enemies
+            enemies.Remove(collider.gameObject.GetComponent<Enemy>());
+            Debug.Log("exit");
+        }
+    }
+
 }
