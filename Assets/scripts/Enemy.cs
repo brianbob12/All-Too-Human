@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
+    public LevelManager levelManager;//level manager handels level wide variables
+    public Path path;//the path that the enemy will follow
+    public float speed = 0.1f;//if the speed is too fast it will lead to issues
+
     //private variables
     private int health = 100;
+    private int node = 0;
+    private PathNode target=null;
+    private bool finished = false;//is true when enemy has finished path
+    private Rigidbody2D rb;
 
     public int getHealth() { return this.health; }
     public void setHealth(int toSet) { this.health = toSet; }
@@ -17,13 +25,49 @@ public class Enemy : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+        rb = this.gameObject.GetComponent<Rigidbody2D>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+
+    
+    private void FixedUpdate()
+    {
+        if (finished) {
+            //do something
+            return;
+        }
+        //if not finished
+        if (target == null)
+        {//if first frame
+            target = path.getPathNode(0);
+        }
+        else {
+            //check if arrived at current target
+            if (target.amIHere(this))
+            {
+                node += 1;
+                if (node >= path.finalNode())
+                {
+                    finished = true;
+                }
+                else {
+                    //update target
+                    target = path.getPathNode(node);
+                }
+            }
+            else {
+                //move towards node
+                Vector2 toMove = target.transform.position - this.transform.position;
+                toMove /= toMove.magnitude;//normalize
+                toMove *= speed;
+                rb.MovePosition((Vector2)this.transform.position + toMove);
+            }
+        }
+    }
 
     public bool checkDie() {//checks if enmy is dead returns if the enemy is dead
         if (this.health <= 0) {

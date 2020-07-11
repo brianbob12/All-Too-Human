@@ -11,15 +11,12 @@ public class Tower : MonoBehaviour {
     public int damage = 0;//damage delt per shot
 
     //private variables
-    private int health;
     private bool active=true;//whether or not this Tower is active
     private Rigidbody2D rb;
     private Enemy target;//currently selected target
     private float fireingTimer = 0;//logs fixedUPdates since last fired
 
-    //getters and setters
-    public int getHealth() { return this.health; }
-    public void setHealth(int toSet) { this.health = toSet; }
+    //getters and setters}
 
     public bool getActive() { return this.active; }
     public void setActive(bool set) { this.active = set; }
@@ -139,7 +136,6 @@ public class Tower : MonoBehaviour {
             //collision with enemy
             //add object to enemies
             enemies.Add(collider.gameObject.GetComponent<Enemy>());
-            Debug.Log("enter");
             
         }
     }
@@ -150,7 +146,6 @@ public class Tower : MonoBehaviour {
             //collision with enemy
             //add object to enemies
             enemies.Remove(collider.gameObject.GetComponent<Enemy>());
-            Debug.Log("exit");
         }
     }
 

@@ -237,6 +237,8 @@
   <ItemGroup>
     <Compile Include="Assets\scripts\Enemy.cs" />
     <Compile Include="Assets\scripts\LevelManager.cs" />
+    <Compile Include="Assets\scripts\Path.cs" />
+    <Compile Include="Assets\scripts\PathNode.cs" />
     <Compile Include="Assets\scripts\Player.cs" />
     <Compile Include="Assets\scripts\Tower.cs" />
   </ItemGroup>
