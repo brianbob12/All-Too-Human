@@ -7,9 +7,10 @@ public class Enemy : MonoBehaviour {
     public LevelManager levelManager;//level manager handels level wide variables
     public Path path;//the path that the enemy will follow
     public float speed = 0.1f;//if the speed is too fast it will lead to issues
+    public int startingHealth;
 
     //private variables
-    private int health = 100;
+    private int health;
     private int node = 0;
     private PathNode target=null;
     private bool finished = false;//is true when enemy has finished path
@@ -28,6 +29,7 @@ public class Enemy : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         rb = this.gameObject.GetComponent<Rigidbody2D>();
+        health = startingHealth;
 	}
 	
 	// Update is called once per frame
