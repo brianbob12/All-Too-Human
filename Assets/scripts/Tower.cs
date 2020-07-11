@@ -5,10 +5,13 @@ using UnityEngine;
 public class Tower : MonoBehaviour {
 
     //public variables
+    public LevelManager levelManager;
     public CircleCollider2D rangeCollider;
+    public GameObject weaponSource;//the source of bullets
     public float maxHealth = 100;
     public int fireingRate=10;//number of fixedUpdates between shots
     public int damage = 0;//damage delt per shot
+    public GameObject projectile;//prefab of bullet
 
     //private variables
     private bool active=true;//whether or not this Tower is active
@@ -48,83 +51,108 @@ public class Tower : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        //select target
-        target = null;
+        if (!levelManager.getPause())
+        {
+            //select target
+            target = null;
 
-        //this part is for removing dead enemies
-        List<Enemy> enemiesCopy = new List<Enemy>();
-        foreach (Enemy en in enemies) {
-            enemiesCopy.Add(en);
-        }
+            //this part is for removing dead enemies
+            List<Enemy> enemiesCopy = new List<Enemy>();
+            foreach (Enemy en in enemies)
+            {
+                enemiesCopy.Add(en);
+            }
 
-        if (enemies.Count != 0) {
-            foreach (Enemy en in enemiesCopy) {
-                if (en == null)
-                {//en has died
-                    //remove en from master list
-                    enemies.Remove(en);
-                    continue;
-                }
+            if (enemies.Count != 0)
+            {
+                foreach (Enemy en in enemiesCopy)
+                {
+                    if (en == null)
+                    {//en has died
+                     //remove en from master list
+                        enemies.Remove(en);
+                        continue;
+                    }
 
-                if (target == null) {
-                    target = en;
-                    continue;
-                }
-                if (this.setting == attackSetting.AHEAD)
-                {
-                    if (en.aheadScore() > target.aheadScore()) {
-                        target = en;
-                    }
-                }
-                else if (this.setting == attackSetting.BEHIND)
-                {
-                    if (en.aheadScore() < target.aheadScore())
+                    if (target == null)
                     {
                         target = en;
+                        continue;
                     }
-                }
-                else if (this.setting == attackSetting.STRONG)
-                {
-                    if (en.strengthScore() > target.strengthScore())
+                    if (this.setting == attackSetting.AHEAD)
                     {
-                        target = en;
+                        if (en.aheadScore() > target.aheadScore())
+                        {
+                            target = en;
+                        }
                     }
-                }
-                else if (this.setting == attackSetting.WEAK)
-                {
-                    if (en.strengthScore() < target.strengthScore())
+                    else if (this.setting == attackSetting.BEHIND)
                     {
-                        target = en;
+                        if (en.aheadScore() < target.aheadScore())
+                        {
+                            target = en;
+                        }
                     }
-                }
-                else if (this.setting == attackSetting.FAR)
-                {
-                    if (en.closeScore(this.gameObject) > target.closeScore(this.gameObject))
+                    else if (this.setting == attackSetting.STRONG)
                     {
-                        target = en;
+                        if (en.strengthScore() > target.strengthScore())
+                        {
+                            target = en;
+                        }
                     }
-                }
-                else if (this.setting == attackSetting.CLOSE)
-                {
-                    if (en.closeScore(this.gameObject) < target.closeScore(this.gameObject))
+                    else if (this.setting == attackSetting.WEAK)
                     {
-                        target = en;
+                        if (en.strengthScore() < target.strengthScore())
+                        {
+                            target = en;
+                        }
+                    }
+                    else if (this.setting == attackSetting.FAR)
+                    {
+                        if (en.closeScore(this.gameObject) > target.closeScore(this.gameObject))
+                        {
+                            target = en;
+                        }
+                    }
+                    else if (this.setting == attackSetting.CLOSE)
+                    {
+                        if (en.closeScore(this.gameObject) < target.closeScore(this.gameObject))
+                        {
+                            target = en;
+                        }
                     }
                 }
             }
-        }
-        //point towards target
+            //point towards target
 
-        //attack timer
-        if (fireingTimer >= fireingRate) {
+            //attack timer
+            if (fireingTimer >= fireingRate)
+            {
 
-            if (target != null) {
-                fireingTimer = 0;
-                //fire
-                target.damage(damage);
-                //TODO
-                //play fireing animation
-                //dispatch lazer
+                if (target != null)
+                {
+                    fireingTimer = 0;
+                    //fire
+                    target.damage(damage);
+                    //TODO
+                    //play fireing animation
+                    //dispatch weapon
+                    Vector2 fireVector = ((Vector2)target.transform.position+target.getGoing()*35) - (Vector2)weaponSource.transform.position;
+                    fireVector /= fireVector.magnitude;//normalize
+                    Debug.Log(transform.position+weaponSource.transform.localPosition);
+                    Bullet placed = Instantiate(projectile, transform.position + weaponSource.transform.localPosition, Quaternion.identity).GetComponent<Bullet>();
+                    //setup
+                    placed.target = target.gameObject;
+                    placed.motionVector = fireVector;
+                    placed.speed = 0.6f;
+                }
+                else
+                {
+                    fireingTimer += 1;
+                }
+            }
+            else {
+                fireingTimer += 1;
             }
         }
     }
