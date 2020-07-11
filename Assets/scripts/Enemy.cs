@@ -37,7 +37,10 @@ public class Enemy : MonoBehaviour {
     private void FixedUpdate()
     {
         if (finished) {
-            //do something
+            //remove life
+            levelManager.removeLife();
+            //die
+            Destroy(this.gameObject);
             return;
         }
         //if not finished
