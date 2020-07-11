@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
+using System;
 
 public class LevelManager : MonoBehaviour {
 
@@ -13,9 +15,15 @@ public class LevelManager : MonoBehaviour {
     public int priceOfSniper = 100;
     public int priceOfWhacker = 100;
     public int priceOfTeen = 100;
+    public float waveCooldown=30;
+    public int waveLimit = 3;//number of waves in the system
 
     //public gameObjects
     public Player player;
+    public GameObject enemy1;
+    public GameObject enemy2;
+    public GameObject enemy3;
+    public Path path;
 
     //robot prefabs
     public GameObject wandererPrefab;
@@ -34,11 +42,19 @@ public class LevelManager : MonoBehaviour {
     private int score = 0;
     private int lives;
     private int money = 0;
-    private int wave = 0;//wave count
     private bool wifi = true;//wifi satus true is on
-    private bool waveOn = false;//whether or not a wave is currently active
     private bool storeOpen = false;//stores if the store UI is open
     private bool pause = false;//stores whether the level is progressing
+
+    //wave stuff
+    private int wave = 0;//wave count
+    private int intraWaveIndex = 0;//position in wave
+    private bool waveOn = false;//whether or not a wave is currently active
+    private string wavePath = "assets/waves";//path to wave files
+    private List<int> types;//list of aliens
+    private List<float> delays;//delays in seconds between each enemy
+    private float lastTime;//last time an enemy was relased
+    private int enemiesInWave;
 
     //getters and setters
     public int getScore() { return this.score; }
@@ -86,6 +102,7 @@ public class LevelManager : MonoBehaviour {
         lives = startingLives;
         money = startingMoney;
         Cursor.lockState = CursorLockMode.Locked;
+        lastTime = getTime();
     }
 	
 	// Update is called once per frame
@@ -101,6 +118,63 @@ public class LevelManager : MonoBehaviour {
         //check for menu presses
         if (storeOpen&&Input.GetKeyDown(KeyCode.Escape)) {
             closeStore();
+        }
+
+        //waves
+        if (waveOn) {
+            if (getTime() - lastTime > delays[intraWaveIndex]) {
+                //new enemy
+                int tempType = types[intraWaveIndex];
+                switch (tempType) {
+                    case 1:
+                        spawn(enemy1);
+                        break;
+                    case 2:
+                        spawn(enemy2);
+                        break;
+                    case 3:
+                        spawn(enemy3);
+                        break;
+
+                }
+                lastTime = getTime();//very important
+                intraWaveIndex += 1;
+                if (intraWaveIndex >= enemiesInWave) {
+                    waveOn = false;
+                    //end of wave
+                }
+            }
+        }
+        else if(getTime()-lastTime>waveCooldown){//time for new wave
+            wave += 1;
+            if (wave > waveLimit)
+            {
+                //TODO do something at wave limit
+                wave -= 1;
+                lastTime = getTime();
+            }
+            else {//start new wave
+                //clear viarables
+                Debug.Log("starting new wave");
+                intraWaveIndex = 0;
+                types = new List<int>();
+                delays = new List<float>();
+                enemiesInWave = 0;
+                //read from file
+                StreamReader inputStream = new StreamReader(wavePath+"/WAVE"+wave.ToString()+".txt");
+
+                while (!inputStream.EndOfStream)
+                {
+                    string[] temp = inputStream.ReadLine().Split(',');
+                    enemiesInWave += 1;
+                    types.Add(int.Parse(temp[0]));
+                    delays.Add(float.Parse(temp[1]));
+                }
+                inputStream.Close();
+                //let's go!
+                waveOn = true;
+                lastTime = getTime();
+            }
         }
     }
 
@@ -132,5 +206,18 @@ public class LevelManager : MonoBehaviour {
         else {
             //indicate to the player not enough money
         }
+    }
+
+    private float getTime(){//returns a float of seconds since jan 1 1970
+
+        float time = (float)((DateTime.Now - new DateTime(1970, 1, 1)).TotalSeconds-1594000000);
+        return time;
+    }
+
+    private void spawn(GameObject enemy) {//spawns at first node in path
+        Enemy placed = Instantiate(enemy, path.getPathNode(0).transform.position, Quaternion.identity).GetComponent<Enemy>();
+        //setup
+        placed.levelManager = this;
+        placed.path = path;
     }
 }
