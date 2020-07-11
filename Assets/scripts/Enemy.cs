@@ -7,9 +7,11 @@ public class Enemy : MonoBehaviour {
     public LevelManager levelManager;//level manager handels level wide variables
     public Path path;//the path that the enemy will follow
     public float speed = 0.1f;//if the speed is too fast it will lead to issues
+    public int startingHealth;
+    public int strength;
 
     //private variables
-    private int health = 100;
+    private int health;
     private int node = 0;
     private PathNode target=null;
     private bool finished = false;//is true when enemy has finished path
@@ -28,6 +30,7 @@ public class Enemy : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         rb = this.gameObject.GetComponent<Rigidbody2D>();
+        health = startingHealth;
 	}
 	
 	// Update is called once per frame
@@ -100,10 +103,17 @@ public class Enemy : MonoBehaviour {
     }
     public float strengthScore()//returns a value for the strenght of enemy
     {
-        return 1f;//TODO finish
+        return strength;
     }
     public float aheadScore()//returns a value for the distance of the enemy along the track
     {
-        return 0f;//TODO finsih
+        float distanceToNextNode = (transform.position - target.transform.position).magnitude;
+        if (node > 0) {
+           
+            distanceToNextNode /= (target.transform.position - path.getPathNode(node - 1).transform.position).magnitude;//as a fraction of total distance
+            return node + distanceToNextNode;
+        }
+        //else
+        return 1/distanceToNextNode;
     }
 }

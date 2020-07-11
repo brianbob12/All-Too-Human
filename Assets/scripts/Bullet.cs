@@ -36,6 +36,8 @@ public class Bullet : MonoBehaviour {
         }
         else {
             //move
+            //motionVector =  target.transform.position- transform.position;
+            //motionVector /= motionVector.magnitude;
             transform.position += (Vector3) motionVector * speed;
         }
         line.SetPosition(0, (Vector2)transform.position + (motionVector) * length);
