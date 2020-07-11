@@ -113,7 +113,6 @@ GameObject:
   - component: {fileID: 58126185834973036}
   - component: {fileID: 50502636257973648}
   - component: {fileID: 58808357011056130}
-  - component: {fileID: 114664253320203970}
   m_Layer: 0
   m_Name: Sniper Tower
   m_TagString: Untagged
@@ -390,17 +389,6 @@ MonoBehaviour:
   firePoint7: {fileID: 1752153680967834}
   firePoint8: {fileID: 1397874467251960}
   setting: 0
---- !u!114 &114664253320203970
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1801674219569924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e06b080ae29ec4f489a9835219bcff35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &212096530679095992
 SpriteRenderer:
   m_ObjectHideFlags: 1
