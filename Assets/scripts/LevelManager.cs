@@ -207,6 +207,32 @@ public class LevelManager : MonoBehaviour {
             //indicate to the player not enough money
         }
     }
+    public void buyWhacekr()
+    {
+        if (enoughMoney(priceOfWhacker))
+        {
+            money -= priceOfWhacker;
+            player.setHolding(whackerPrefab);
+            closeStore();
+        }
+        else
+        {
+            //indicate to the player not enough money
+        }
+    }
+    public void buySniper()
+    {
+        if (enoughMoney(priceOfSniper))
+        {
+            money -= priceOfSniper;
+            player.setHolding(sniperPrefab);
+            closeStore();
+        }
+        else
+        {
+            //indicate to the player not enough money
+        }
+    }
 
     private float getTime(){//returns a float of seconds since jan 1 1970
 

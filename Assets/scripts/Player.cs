@@ -13,7 +13,7 @@ public class Player : MonoBehaviour {
 
     //private variables
     private GameObject holding=null;//what the player is currently holding(as Prefab) null for nothing
-    private const float distanceToStore = 1.5f;//how far from the store the player needs to be to buy
+    private const float distanceToActivate = 1.5f;//how far from the store the player needs to be to activate object
     private Rigidbody2D rb;
 
     public void setHolding(GameObject set) {
@@ -39,7 +39,7 @@ public class Player : MonoBehaviour {
 
             if (Input.GetButtonDown("Fire1")) {
                 //check distance to store
-                if (((Vector2)(this.transform.position - store.transform.position)).magnitude < distanceToStore)
+                if (((Vector2)(this.transform.position - store.transform.position)).magnitude < distanceToActivate)
                 {
                     //at store
                     if (holding == null)
@@ -51,7 +51,26 @@ public class Player : MonoBehaviour {
                         //indicate to the player that they can't buy robots while holding an object
                     }
                 }
-                else if(holding!=null){
+                else if (holding == null) {
+                    //iterate over wandereres
+                    Object[] roaming= Object.FindObjectsOfType(typeof(GameObject));
+                    foreach (Object w in roaming)
+                    {
+                        GameObject temp = (GameObject)w;
+                        if (temp.GetComponent<Wanderer>() != null) {
+                            if (!temp.GetComponent<Tower>().getActive())
+                            {
+                                if (((Vector2)(this.transform.position - temp.transform.position)).magnitude < distanceToActivate) {
+                                    //pick up wanderer
+                                    holding = levelManager.wandererPrefab;//hold wanderer
+                                    Destroy(temp);//poosible foreach issues
+                                }
+                            }
+                        }
+                    }
+                }
+                else if (holding != null)
+                {
                     if (holding.GetComponent<Tower>() != null)
                     {
                         //try to place robot

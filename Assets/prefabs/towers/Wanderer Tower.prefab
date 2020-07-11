@@ -367,6 +367,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e06b080ae29ec4f489a9835219bcff35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wanderingSpeed: 15
+  wanderRate: 600
 --- !u!114 &114739659837697796
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -380,7 +382,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelManager: {fileID: 0}
   rangeCollider: {fileID: 58225157618131136}
-  maxHealth: 100
   bulletSpeed: 0.03
   fireingRate: 30
   damage: 5
