@@ -9,6 +9,7 @@ public class Tower : MonoBehaviour {
     public CircleCollider2D rangeCollider;
     
     public float maxHealth = 100;
+    public float bulletSpeed;
     public int fireingRate=10;//number of fixedUpdates between shots
     public int damage = 0;//damage delt per shot
     public GameObject projectile;//prefab of bullet
@@ -212,13 +213,36 @@ public class Tower : MonoBehaviour {
                     //TODO
                     //play fireing animation
                     //dispatch weapon
+
+                    //old system
+                    
                     Vector2 fireVector = ((Vector2)target.transform.position+target.getGoing()*35) - (Vector2)activeFirePoint.transform.position;
                     fireVector /= fireVector.magnitude;//normalize
+                    
+
+                    //new system
+                    /*
+                    Vector2 alpha = (Vector2)activeFirePoint.transform.position - (Vector2)target.transform.position;
+                    alpha /= alpha.magnitude;
+                    alpha *= bulletSpeed;
+                    alpha *= ((Vector2)target.transform.position).magnitude / target.getGoing().magnitude;
+                    //convergance
+                    for (int i = 0; i < 50;i++) {
+                        Vector2 newAlpha= (Vector2)activeFirePoint.transform.position - alpha;
+                        newAlpha /= newAlpha.magnitude;
+                        newAlpha*= bulletSpeed;
+                        newAlpha *= alpha.magnitude / target.getGoing().magnitude;
+                        alpha = newAlpha;
+                    }
+
+                    Vector2 fireVector = alpha;
+                    */
+
                     Bullet placed = Instantiate(projectile, activeFirePoint.transform.position, Quaternion.identity).GetComponent<Bullet>();
                     //setup
                     placed.target = target.gameObject;
                     placed.motionVector = fireVector;
-                    placed.speed = 0.6f;
+                    placed.speed = bulletSpeed;
                 }
                 else
                 {

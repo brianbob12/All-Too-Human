@@ -381,8 +381,9 @@ MonoBehaviour:
   levelManager: {fileID: 0}
   rangeCollider: {fileID: 58225157618131136}
   maxHealth: 100
+  bulletSpeed: 0.03
   fireingRate: 30
-  damage: 20
+  damage: 5
   projectile: {fileID: 1588798755167098, guid: 1e31bcd8183b00941a77d2fa719d689c, type: 2}
   stand1: {fileID: 21300000, guid: 5038517cb50f64840bf5bd512fd5932d, type: 3}
   stand2: {fileID: 21300000, guid: d59e795560397f54f84db901d8358669, type: 3}
