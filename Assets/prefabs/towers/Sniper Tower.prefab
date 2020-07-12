@@ -113,6 +113,7 @@ GameObject:
   - component: {fileID: 58126185834973036}
   - component: {fileID: 50502636257973648}
   - component: {fileID: 58808357011056130}
+  - component: {fileID: 114899649121867048}
   m_Layer: 0
   m_Name: Sniper Tower
   m_TagString: Untagged
@@ -238,7 +239,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1801674219569924}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.56, y: 4.18, z: 0}
+  m_LocalPosition: {x: -10.56, y: 4.18, z: 3}
   m_LocalScale: {x: 10.1128645, y: 10.112858, z: 10.112858}
   m_Children:
   - {fileID: 4628826682319548}
@@ -389,6 +390,20 @@ MonoBehaviour:
   firePoint7: {fileID: 1752153680967834}
   firePoint8: {fileID: 1397874467251960}
   setting: 0
+--- !u!114 &114899649121867048
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1801674219569924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ebac5535875c1e44b2d2d9c87d63558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wanderRate: 5000
+  animationTime: 0.3
+  anim: []
 --- !u!212 &212096530679095992
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -128,8 +128,8 @@ GameObject:
   - component: {fileID: 114739659837697796}
   - component: {fileID: 58225157618131136}
   - component: {fileID: 50311523227314288}
-  - component: {fileID: 58177454335783996}
   - component: {fileID: 114642703633995190}
+  - component: {fileID: 61950452779038274}
   m_Layer: 0
   m_Name: Wanderer Tower
   m_TagString: Untagged
@@ -239,7 +239,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1820955780117970}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.09, y: -0.26, z: 0}
+  m_LocalPosition: {x: -8.09, y: -0.26, z: 3}
   m_LocalScale: {x: 10.1128645, y: 10.112858, z: 10.112858}
   m_Children:
   - {fileID: 4199016117653012}
@@ -326,21 +326,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
---- !u!58 &58177454335783996
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1820955780117970}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.08
 --- !u!58 &58225157618131136
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -356,6 +341,31 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.32
+--- !u!61 &61950452779038274
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1820955780117970}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.01230427, y: -0.01148451}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.1037432, y: 0.08907916}
+  m_EdgeRadius: 0
 --- !u!114 &114642703633995190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -368,7 +378,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wanderingSpeed: 15
-  wanderRate: 600
+  wanderRate: 3000
 --- !u!114 &114739659837697796
 MonoBehaviour:
   m_ObjectHideFlags: 1

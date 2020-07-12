@@ -12,10 +12,17 @@ public class Sleeper : Tower {
     private float lastTime;
     public Sprite[] attackSequence;
     //sleeping
+    private bool intoSleeping = false;
+    private int intoSleepFrame = 0;
+    public float intoSleepTime = 1;
+    public Sprite[] intoSleepSequence;
+
     private bool sleeping = false;
     private int sleepFrame = 0;
-    private int sleepingFrames = 5;
+    public float sleepTime=1;
     public Sprite[] sleepSequence;
+
+    private bool wakeing;
 
     protected override void Start()
     {
@@ -55,13 +62,45 @@ public class Sleeper : Tower {
         base.inActiveUpdate();
         if (sleeping)
         {
-            if (getTime() - lastTime > timePerFame)
+            if (intoSleeping)
+            {
+                if (getTime() - lastTime > intoSleepTime)
+                {
+                    intoSleepFrame += 1;
+                    if (intoSleepFrame >= intoSleepSequence.Length)
+                    {
+                        intoSleeping = false;
+                    }
+                    else
+                    {
+                        spr.sprite = intoSleepSequence[intoSleepFrame];
+                    }
+                    lastTime = getTime();
+                }
+            }
+            else if (wakeing)
+            {
+                intoSleepFrame -= 1;
+                if (intoSleepFrame <= 0)
+                {
+                    wakeing = false;
+                    sleeping = false;
+                    setActive(true);
+                }
+                else
+                {
+                    spr.sprite = intoSleepSequence[intoSleepFrame];
+                }
+
+            }
+            else if (getTime() - lastTime > sleepTime)
             {
                 sleepFrame += 1;
-                sleepFrame %= sleepingFrames;
-                spr.sprite = sleepSequence[attackFrame];
+                sleepFrame %= sleepSequence.Length;
+                spr.sprite = sleepSequence[sleepFrame];
                 lastTime = getTime();
             }
+            
         }
     }
 
@@ -85,12 +124,15 @@ public class Sleeper : Tower {
 
     public void goToSleep() {
         setActive(false);
-
+        sleeping = true;
+        intoSleeping = true;
+        intoSleepFrame = -1;
+        sleepFrame = -1;
     }
 
     public void wake() {//rudly awakens robot from gentle slumber
-        sleeping = false;
-        spr.sprite = stand1;
+        wakeing= true;
+        intoSleepFrame = intoSleepSequence.Length;
     }
 
 }
