@@ -45,6 +45,7 @@ public class Tower : MonoBehaviour {
 
     public bool getActive() { return this.active; }
     public void setActive(bool set) { this.active = set; }
+    public Enemy getTarget() { return target; }
 
     private List<Enemy> enemies = new List<Enemy>();
 

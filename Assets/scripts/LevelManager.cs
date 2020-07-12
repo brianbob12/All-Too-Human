@@ -32,7 +32,7 @@ public class LevelManager : MonoBehaviour {
     public GameObject teenPrefab;
 
     //UI objects
-    public Text livesText;
+    public Text holdingText;
     public Text moneyText;
     public Image DeathScreen;
     public GameObject GameOver;
@@ -107,7 +107,35 @@ public class LevelManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        livesText.text = lives.ToString() + " Lives";
+        GameObject playerHold = player.getHolding();
+        if (playerHold != null) {
+            if (playerHold.GetComponent<Tower>() != null)
+            {
+                if (playerHold.GetComponent<FlowerWatch>())
+                {
+                    holdingText.text = "Holding Sniper Robot";
+                }
+                else if (playerHold.GetComponent<Sleeping>())
+                {
+                    holdingText.text = "Holding Whacker Robot";
+                }
+                else if (playerHold.GetComponent<Wanderer>())
+                {
+                    holdingText.text = "Holding Wanderer Robot";
+                }
+            }
+            else if (playerHold.GetComponent<Airhorn>()!=null)
+            {
+                holdingText.text = "Holding Tactical Portable Focus Procurement Mechanism(TPFPM)";
+            }
+            else if (playerHold.GetComponent<WakeUpKit>()!=null)
+            {
+                holdingText.text = "Holding Executive Wakup Kit";
+            }
+        }
+        else {
+            holdingText.text = "Not Holding Anything";
+        }
 
         moneyText.text = "$" + money.ToString();
 	}
@@ -180,7 +208,7 @@ public class LevelManager : MonoBehaviour {
 
     public void openStore() {//opens store
         storeOpen = true;
-        pause = true;
+        //pause = true;
         storeMenu.SetActive(true);
         //unclock cursor
         Cursor.lockState = CursorLockMode.None;

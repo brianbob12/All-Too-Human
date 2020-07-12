@@ -402,8 +402,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wanderRate: 5000
-  animationTime: 0.3
-  anim: []
+  animationTime: 1.2
+  anim:
+  - {fileID: 21300000, guid: 41aa2a1bf66776a44ab3a2ff83cbbb08, type: 3}
+  - {fileID: 21300000, guid: bc9ac7e8bd0cbbc4785a9fef0a5f120c, type: 3}
+  - {fileID: 21300000, guid: 441c982a63c0e4b45bbc5294457eafa2, type: 3}
 --- !u!212 &212096530679095992
 SpriteRenderer:
   m_ObjectHideFlags: 1

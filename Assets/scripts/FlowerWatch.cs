@@ -19,7 +19,7 @@ public class FlowerWatch : MonoBehaviour {
     // Use this for initialization
     void Start () {
         tow = GetComponent<Tower>();
-        spr = GetComponent<SpriteRenderer>();
+        spr = GetComponentInChildren<SpriteRenderer>();
 	}
 	
 	// Update is called once per frame
@@ -29,16 +29,9 @@ public class FlowerWatch : MonoBehaviour {
             if (getTime() - lastTime > animationTime)
             {
                 animationIndex += 1;
+                animationIndex %= anim.Length;
                 lastTime = getTime();
-                if (animationIndex >= anim.Length)
-                {
-                    wake();
-                }
-                else
-                {
-                    spr.sprite = anim[animationIndex];
-
-                }
+                spr.sprite = anim[animationIndex];
             }
         }
 	}
@@ -53,6 +46,7 @@ public class FlowerWatch : MonoBehaviour {
 
     public void wake() {
         playingAnimation = false;
+        spr.sprite = tow.stand5;
         tow.setActive(true);
     }
 
