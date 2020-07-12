@@ -122,6 +122,7 @@ MonoBehaviour:
   trashCan: {fileID: 0}
   torch: {fileID: 0}
   airHorn: {fileID: 0}
+  adderall: {fileID: 1513926927593748, guid: 38d1e38f0417cf144835ea7252ff51f1, type: 2}
   fatCollider: {fileID: 58989707878289902}
   walkingNone1:
   - {fileID: 21300000, guid: 5d91fe913fff1a84ca066b8e55481727, type: 3}

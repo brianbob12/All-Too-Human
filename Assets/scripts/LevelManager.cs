@@ -132,6 +132,10 @@ public class LevelManager : MonoBehaviour {
             {
                 holdingText.text = "Holding Executive Wakup Kit";
             }
+            else if (playerHold.GetComponent<Adderall>() != null)
+            {
+                holdingText.text = "Holding Robot Adderall";
+            }
         }
         else {
             holdingText.text = "Not Holding Anything";

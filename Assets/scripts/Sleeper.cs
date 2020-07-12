@@ -11,6 +11,7 @@ public class Sleeper : Tower {
  
     private float lastTime;
     public Sprite[] attackSequence;
+    public Sprite[] focusedAttackSequence;
     //sleeping
     private bool intoSleeping = false;
     private int intoSleepFrame = 0;
@@ -45,13 +46,38 @@ public class Sleeper : Tower {
                     if (attackFrame >= attackingFrames)
                     {
                         attacking = false;
-                        spr.sprite = stand1;
+                        if(focused)
+                        {
+                            spr.sprite = focused1;
+                        }
+                        else
+                        {
+                            spr.sprite = stand1;
+                        }
                     }
                     else
                     {
-                        spr.sprite = attackSequence[attackFrame];
+                        if (focused)
+                        {
+                            spr.sprite = focusedAttackSequence[attackFrame];
+                        }
+                        else
+                        {
+                            spr.sprite = attackSequence[attackFrame];
+                        }
                         lastTime = getTime();
                     }
+                }
+            }
+            else
+            {
+                if (focused)
+                {
+                    spr.sprite = focused1;
+                }
+                else
+                {
+                    spr.sprite = stand1;
                 }
             }
         }
@@ -112,7 +138,14 @@ public class Sleeper : Tower {
             attacking = true;
             attackFrame = 0;
             lastTime = getTime();
-            spr.sprite = attackSequence[0];
+            if (focused)
+            {
+                spr.sprite = focusedAttackSequence[0];
+            }
+            else
+            {
+                spr.sprite = attackSequence[0];
+            }
         }
     }
 

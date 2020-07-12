@@ -151,6 +151,7 @@ MonoBehaviour:
   fireingRate: 60
   damage: 15
   projectile: {fileID: 0}
+  focusDuration: 12
   stand1: {fileID: 21300000, guid: b315a5c7eb8f3614c9861a0e5fdb2f0d, type: 3}
   stand2: {fileID: 0}
   stand3: {fileID: 0}
@@ -159,6 +160,14 @@ MonoBehaviour:
   stand6: {fileID: 0}
   stand7: {fileID: 0}
   stand8: {fileID: 0}
+  focused1: {fileID: 21300000, guid: 8aee4e02f3444c94188e43e82b0ed79f, type: 3}
+  focused2: {fileID: 0}
+  focused3: {fileID: 0}
+  focused4: {fileID: 0}
+  focused5: {fileID: 0}
+  focused6: {fileID: 0}
+  focused7: {fileID: 0}
+  focused8: {fileID: 0}
   firePoint1: {fileID: 0}
   firePoint2: {fileID: 0}
   firePoint3: {fileID: 0}
@@ -177,6 +186,15 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 29a201a5b42e5d345b469c427cfc8ba6, type: 3}
   - {fileID: 21300000, guid: e5a3a5b46ada4c04ca26d6b869873152, type: 3}
   - {fileID: 21300000, guid: 931646b0a7dfe6e449a55968d4144022, type: 3}
+  focusedAttackSequence:
+  - {fileID: 21300000, guid: 3652b054df8a39041a279d918e2094b1, type: 3}
+  - {fileID: 21300000, guid: 4f325dc4b57621245a2dc5b1b948d994, type: 3}
+  - {fileID: 21300000, guid: 372e1e823ef5c8b4e901af37c60752c9, type: 3}
+  - {fileID: 21300000, guid: dcd56ad51cf7fcd49ae56687198255ec, type: 3}
+  - {fileID: 21300000, guid: 11b9e401d7eca0446b5fa03abe0273ef, type: 3}
+  - {fileID: 21300000, guid: b00e69655f670ab45b75772aa48579c7, type: 3}
+  - {fileID: 21300000, guid: f42e035fd6bc98646b72c938e1b43019, type: 3}
+  - {fileID: 21300000, guid: 3697a66ced88b5a47b2f1bca3396fb82, type: 3}
   intoSleepTime: 1
   intoSleepSequence:
   - {fileID: 21300000, guid: b315a5c7eb8f3614c9861a0e5fdb2f0d, type: 3}

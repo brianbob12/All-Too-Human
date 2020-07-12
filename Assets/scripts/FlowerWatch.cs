@@ -38,7 +38,7 @@ public class FlowerWatch : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        if (Random.Range(0, wanderRate) < 1)
+        if (Random.Range(0, wanderRate) < 1&&!tow.getFocused())
         {
             distract();
         }
@@ -46,7 +46,14 @@ public class FlowerWatch : MonoBehaviour {
 
     public void wake() {
         playingAnimation = false;
-        spr.sprite = tow.stand5;
+        if (tow.getFocused())
+        {
+            spr.sprite = tow.focused5;
+        }
+        else
+        {
+            spr.sprite = tow.stand5;
+        }
         tow.setActive(true);
     }
 

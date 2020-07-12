@@ -24,9 +24,12 @@ public class Sleeping : MonoBehaviour {
     {
         if (sleeper.getActive())
         {
-            if (Random.Range(0, wanderRate) < 1)
+            if (!GetComponent<Tower>().getFocused())
             {
-                sleeper.goToSleep();
+                if (Random.Range(0, wanderRate) < 1)
+                {
+                    sleeper.goToSleep();
+                }
             }
         }
         else
