@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour {
     public float speed = 0.1f;//if the speed is too fast it will lead to issues
     public int startingHealth;
     public int strength;
+    public Sprite im1;
+    public Sprite im2;
 
     //private variables
     private int health;
@@ -17,8 +19,11 @@ public class Enemy : MonoBehaviour {
     private bool finished = false;//is true when enemy has finished path
     private Rigidbody2D rb;
     private Vector2 going;//the direction that the enemy is travelling in
+    private SpriteRenderer spr;
+    private bool im1Sel = true;//used for switching images
 
     public int getHealth() { return this.health; }
+    public int imageChangeInverseFrequency = 30;
     public void setHealth(int toSet) { this.health = toSet; }
     public Vector2 getGoing() { return going; }
     public bool damage(int damage) {//decraeses health and returns whether this enemy has died
@@ -31,11 +36,26 @@ public class Enemy : MonoBehaviour {
 	void Start () {
         rb = this.gameObject.GetComponent<Rigidbody2D>();
         health = startingHealth;
+        spr = gameObject.GetComponent<SpriteRenderer>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (!levelManager.getPause()) {
+            if (Random.Range(0, imageChangeInverseFrequency) < 1)
+            {
+                if (im1Sel)
+                {
+                    spr.sprite = im1;
+                }
+                else
+                {
+                    spr.sprite = im2;
+                }
+                im1Sel = !im1Sel;
+            }
+        }
 	}
 
     

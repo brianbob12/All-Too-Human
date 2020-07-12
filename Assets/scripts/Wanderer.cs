@@ -35,7 +35,7 @@ public class Wanderer : MonoBehaviour {
         }
         else {
             //TODO walking animation
-            if (Random.Range(0, wanderRate/4) < 1)
+            if (Random.Range(0, wanderRate/6) < 1)
             {
                 distract();
             }

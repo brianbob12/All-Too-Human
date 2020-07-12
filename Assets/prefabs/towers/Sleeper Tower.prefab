@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 50007683727634152}
   - component: {fileID: 114233950044088832}
   - component: {fileID: 61205062966050770}
+  - component: {fileID: 114455380863796692}
   m_Layer: 0
   m_Name: Sleeper Tower
   m_TagString: Untagged
@@ -53,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1880312437926886}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.42, y: -2.25, z: 0}
+  m_LocalPosition: {x: 2.42, y: -2.25, z: 3}
   m_LocalScale: {x: 10.1128645, y: 10.112858, z: 10.112858}
   m_Children:
   - {fileID: 4447493607754320}
@@ -176,12 +177,34 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 29a201a5b42e5d345b469c427cfc8ba6, type: 3}
   - {fileID: 21300000, guid: e5a3a5b46ada4c04ca26d6b869873152, type: 3}
   - {fileID: 21300000, guid: 931646b0a7dfe6e449a55968d4144022, type: 3}
-  sleepSequence:
+  intoSleepTime: 1
+  intoSleepSequence:
+  - {fileID: 21300000, guid: b315a5c7eb8f3614c9861a0e5fdb2f0d, type: 3}
   - {fileID: 21300000, guid: 14351eb4efc3f2e44bd45650d52da6fa, type: 3}
   - {fileID: 21300000, guid: dd820e623062ab74e85d39f57ca32ec6, type: 3}
   - {fileID: 21300000, guid: 0d0870f2d52b78040bf4012bc5df7875, type: 3}
   - {fileID: 21300000, guid: e062ed29c3406424b90606afdb234dd6, type: 3}
   - {fileID: 21300000, guid: 808d19bfcf0056b46a5f16124c84e92c, type: 3}
+  sleepTime: 2
+  sleepSequence:
+  - {fileID: 21300000, guid: 21bb71d6c8fc0c94c847f940da6e67cd, type: 3}
+  - {fileID: 21300000, guid: 6099b10f7db16f149be07e7417beb4ac, type: 3}
+  - {fileID: 21300000, guid: a37c729f98311f74db953fbb45f39f98, type: 3}
+  - {fileID: 21300000, guid: 612323258436f40448e3fb0d453bc842, type: 3}
+  - {fileID: 21300000, guid: d4fff67e87539bd458d772351ea75c01, type: 3}
+  - {fileID: 21300000, guid: fa171aed56d9c2b44ab5d894d9becf93, type: 3}
+--- !u!114 &114455380863796692
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1880312437926886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae7429b1746405a418ded67d135c0100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wanderRate: 1000
 --- !u!212 &212330729874914718
 SpriteRenderer:
   m_ObjectHideFlags: 1

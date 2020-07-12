@@ -98,7 +98,7 @@ public class Tower : MonoBehaviour {
         }
     }
 
-    protected virtual void inActiveUpdate() {
+    protected virtual void inActiveUpdate() {//to be overridden
 
     }
 
