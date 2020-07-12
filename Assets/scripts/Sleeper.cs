@@ -81,7 +81,7 @@ public class Sleeper : Tower {
             else if (wakeing)
             {
                 intoSleepFrame -= 1;
-                if (intoSleepFrame <= 0)
+                if (intoSleepFrame < 0)
                 {
                     wakeing = false;
                     sleeping = false;
@@ -89,6 +89,7 @@ public class Sleeper : Tower {
                 }
                 else
                 {
+                    //Debug.Log(intoSleepFrame);
                     spr.sprite = intoSleepSequence[intoSleepFrame];
                 }
 
@@ -132,6 +133,7 @@ public class Sleeper : Tower {
 
     public void wake() {//rudly awakens robot from gentle slumber
         wakeing= true;
+        intoSleeping = false;
         intoSleepFrame = intoSleepSequence.Length;
     }
 

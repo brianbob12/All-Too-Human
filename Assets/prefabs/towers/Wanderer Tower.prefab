@@ -378,7 +378,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wanderingSpeed: 15
-  wanderRate: 3000
+  wanderRate: 2000
+  walkingAnimation:
+  - {fileID: 21300000, guid: bbd4701f7d6c0bd4c924b48d9c793488, type: 3}
+  - {fileID: 21300000, guid: 31b807c9a46ef5145a6f6d575513dbaf, type: 3}
+  - {fileID: 21300000, guid: 2eeb5cf5d471f724daba5279e845f2ba, type: 3}
+  - {fileID: 21300000, guid: f1bee056e56b4ed40b49063cb853a366, type: 3}
+  - {fileID: 21300000, guid: 0047f15bad991f944b35f6aa83362980, type: 3}
+  animationTime: 0.1
 --- !u!114 &114739659837697796
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -396,14 +403,14 @@ MonoBehaviour:
   fireingRate: 30
   damage: 5
   projectile: {fileID: 1588798755167098, guid: 1e31bcd8183b00941a77d2fa719d689c, type: 2}
-  stand1: {fileID: 21300000, guid: 5038517cb50f64840bf5bd512fd5932d, type: 3}
-  stand2: {fileID: 21300000, guid: d59e795560397f54f84db901d8358669, type: 3}
-  stand3: {fileID: 21300000, guid: eb478a1b427198a43809e31fd279ce30, type: 3}
-  stand4: {fileID: 21300000, guid: 52a19cce6a2627c46a2c8f91d9bdc72e, type: 3}
-  stand5: {fileID: 21300000, guid: db62823d41382ff45a415819b80b333a, type: 3}
-  stand6: {fileID: 21300000, guid: 09d8c24f789d9e041995ade07edd8f21, type: 3}
-  stand7: {fileID: 21300000, guid: 6b24e5c2402b7ee478a65b3ede78df77, type: 3}
-  stand8: {fileID: 21300000, guid: ec8e73fcf0f01ec40b5393d938c7723c, type: 3}
+  stand1: {fileID: 21300000, guid: 46ddd67ceb0ac0647b061d53fe0c9739, type: 3}
+  stand2: {fileID: 21300000, guid: 9745c9b80914633438309199f407cafb, type: 3}
+  stand3: {fileID: 21300000, guid: a87f5dcaff665f34da56cc2c332ce3ca, type: 3}
+  stand4: {fileID: 21300000, guid: f322d82ef06f3aa45b70605f546555d7, type: 3}
+  stand5: {fileID: 21300000, guid: cdfd39ed6eb175546a3df19ad815b3d8, type: 3}
+  stand6: {fileID: 21300000, guid: 65377cc361878434f8e45487403d8f4a, type: 3}
+  stand7: {fileID: 21300000, guid: 0564252e52d475649850b2eee7e9f726, type: 3}
+  stand8: {fileID: 21300000, guid: 86719441cf0ab8444af717195abf9004, type: 3}
   firePoint1: {fileID: 1864892963898714}
   firePoint2: {fileID: 1074821987317742}
   firePoint3: {fileID: 1481019185247880}

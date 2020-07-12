@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae7429b1746405a418ded67d135c0100, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wanderRate: 1000
+  wanderRate: 2000
 --- !u!212 &212330729874914718
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -8,6 +8,7 @@ public class Player : MonoBehaviour {
     public GameObject store;//a location from where the player can buy things
     public GameObject torches;//a location for the retrival of torches
     public GameObject airHorns;
+    public GameObject trashCan;
 
     //thease are just templates with releavant components
     public GameObject torch;
@@ -16,24 +17,49 @@ public class Player : MonoBehaviour {
     public CircleCollider2D fatCollider;//a collider that is only active when holding something
 
     //images
-    public Sprite stand1;
-    public Sprite stand2;
-    public Sprite stand3;
-    public Sprite stand4;
-    public Sprite stand5;
-    public Sprite stand6;
-    public Sprite stand7;
-    public Sprite stand8;
+    //thase won't show up in inspetor
+    public Sprite[][] walkingNone=new Sprite[8][];//a list of 8 sprite lists consisting of walk animations for each direction
+    public Sprite[][] walkingCase= new Sprite[8][];
+    public Sprite[][] wakeAnimation = new Sprite[8][];//stores animations for each direction
+    public Sprite[][] distractAnimation = new Sprite[8][];
+    //thease will show in inpector
+    public Sprite[] walkingNone1;
+    public Sprite[] walkingNone2;
+    public Sprite[] walkingNone3;
+    public Sprite[] walkingNone4;
+    public Sprite[] walkingNone5;
+    public Sprite[] walkingNone6;
+    public Sprite[] walkingNone7;
+    public Sprite[] walkingNone8;
+    public Sprite[] walkingCase1;
+    public Sprite[] walkingCase2;
+    public Sprite[] walkingCase3;
+    public Sprite[] walkingCase4;
+    public Sprite[] walkingCase5;
+    public Sprite[] walkingCase6;
+    public Sprite[] walkingCase7;
+    public Sprite[] walkingCase8;
 
+    public Sprite[] wake1;
+    public Sprite[] wake2;
+    public Sprite[] wake3;
+    public Sprite[] wake4;
+    public Sprite[] wake5;
+    public Sprite[] wake6;
+    public Sprite[] wake7;
+    public Sprite[] wake8;
+    public Sprite[] distract1;
+    public Sprite[] distract2;
+    public Sprite[] distract3;
+    public Sprite[] distract4;
+    public Sprite[] distract5;
+    public Sprite[] distract6;
+    public Sprite[] distract7;
+    public Sprite[] distract8;
+
+    public Sprite[] stillNone;
+    public Sprite[] stillCase;
     //holding
-    public Sprite hold1;
-    public Sprite hold2;
-    public Sprite hold3;
-    public Sprite hold4;
-    public Sprite hold5;
-    public Sprite hold6;
-    public Sprite hold7;
-    public Sprite hold8;
 
     public const float speed = 0.13f;
 
@@ -43,76 +69,88 @@ public class Player : MonoBehaviour {
     private Rigidbody2D rb;
     private SpriteRenderer spr;
     private bool mobile = true;//wheter the player can move 
+    private bool moving = false;//if player is walking
     private bool playingWakeAnimation = false;
     private bool playingDistractAnimation = false;
     private int animationIndex = 0;
     private float lastTime;
+    private int direction = 0;//the direction that the player is pointing
+    private int smallDirection = 0;//the direction of the player limited to four directions
 
     //animation stuff
     public float animationTime = 0.3f;//time between frames in animation
-    public Sprite[] wakeAnimation;
-    public Sprite[] distractAnimation;
+    
 
     public void setHolding(GameObject set) {
         holding = set;
         //fatCollider.isTrigger = false;
     }
-
+    public GameObject getHolding() { return holding; }
 
 	// Use this for initialization
 	void Start () {
         rb = this.GetComponent<Rigidbody2D>();
         spr = this.GetComponent<SpriteRenderer>();
         lastTime = getTime();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        //check for animations
-        if (playingWakeAnimation)
-        {
-            if (getTime() - lastTime > animationTime)
-            {
-                lastTime = getTime();
-                animationIndex += 1;
-                if (animationIndex >= wakeAnimation.Length)
-                {
-                    mobile = true;
-                    playingWakeAnimation = false;
-                }
-                else
-                {
-                    spr.sprite = wakeAnimation[animationIndex];
-                }
-            }
-        }
-        else if (playingDistractAnimation)
-        {
-            if (getTime() - lastTime > animationTime)
-            {
-                lastTime = getTime();
-                animationIndex += 1;
-                if (animationIndex >= distractAnimation.Length)
-                {
-                    mobile = true;
-                    playingDistractAnimation = false;
-                }
-                else
-                {
-                    spr.sprite = distractAnimation[animationIndex];
-                }
-            }
-        }
+
+        //initialise 2d arrays
+        //walkingNone = new Sprite[][8] { };
+        walkingNone[0] = walkingNone1;
+        walkingNone[1] = walkingNone2;
+        walkingNone[2] = walkingNone3;
+        walkingNone[3] = walkingNone4;
+        walkingNone[4] = walkingNone5;
+        walkingNone[5] = walkingNone6;
+        walkingNone[6] = walkingNone7;
+        walkingNone[7] = walkingNone8;
+        walkingCase[0] = walkingCase1;
+        walkingCase[1] = walkingCase2;
+        walkingCase[2] = walkingCase3;
+        walkingCase[3] = walkingCase4;
+        walkingCase[4] = walkingCase5;
+        walkingCase[5] = walkingCase6;
+        walkingCase[6] = walkingCase7;
+        walkingCase[7] = walkingCase8;
+
+        wakeAnimation[0] = wake1;
+        wakeAnimation[1] = wake2;
+        wakeAnimation[2] = wake3;
+        wakeAnimation[3] = wake4;
+        wakeAnimation[4] = wake5;
+        wakeAnimation[5] = wake6;
+        wakeAnimation[6] = wake7;
+        wakeAnimation[7] = wake8;
+        distractAnimation[0] = distract1;
+        distractAnimation[1] = distract2;
+        distractAnimation[2] = distract3;
+        distractAnimation[3] = distract4;
+        distractAnimation[4] = distract5;
+        distractAnimation[5] = distract6;
+        distractAnimation[6] = distract7;
+        distractAnimation[7] = distract8;
     }
 
-    private void FixedUpdate()
+    // Update is called once per frame
+    void Update()
     {
-        if (!levelManager.getPause()&&mobile) {
-            Vector2 toMove =  new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-            if (toMove.magnitude > 0) { pointToVec(toMove); }//point sprite to direction of movement
+        //check for interactions
+        if (!levelManager.getPause() && mobile)
+        {
+            Vector2 toMove = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            if (toMove.magnitude > 0)
+            {
+                moving = true;
+                pointToVec(toMove);
+            }//point sprite to direction of movement
+            else
+            {
+                moving = false;
+                animationIndex = 0;
+            }
             rb.MovePosition((Vector2)transform.position + speed * toMove);
 
-            if (Input.GetButtonDown("Fire1")||Input.GetKeyDown(KeyCode.Return)) {
+            if (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Return))
+            {
                 //check distance to store
                 if (((Vector2)(this.transform.position - store.transform.position)).magnitude < distanceToActivate)
                 {
@@ -123,6 +161,7 @@ public class Player : MonoBehaviour {
                     }
                     else
                     {
+                        Debug.Log("already holding item");
                         //indicate to the player that they can't buy robots while holding an object
                     }
                 }//check for torches
@@ -131,7 +170,7 @@ public class Player : MonoBehaviour {
                     //at store
                     if (holding == null)
                     {
-                        holding=torch;
+                        holding = torch;
                     }
                     else
                     {
@@ -150,17 +189,25 @@ public class Player : MonoBehaviour {
                         //indicate to the player that they can't buy robots while holding an object
                     }
                 }
-                else if (holding == null) {
+                else if (((Vector2)(this.transform.position - trashCan.transform.position)).magnitude < distanceToActivate)
+                {
+                    //at trashCan
+                    holding = null;
+                }
+                else if (holding == null)
+                {
                     //iterate over wandereres
                     Object[] roaming = Object.FindObjectsOfType(typeof(GameObject));
                     foreach (Object w in roaming)
                     {
                         GameObject temp = (GameObject)w;
                         //check for wanderer
-                        if (temp.GetComponent<Wanderer>() != null) {
+                        if (temp.GetComponent<Wanderer>() != null)
+                        {
                             if (!temp.GetComponent<Tower>().getActive())
                             {
-                                if (((Vector2)(this.transform.position - temp.transform.position)).magnitude < distanceToActivate) {
+                                if (((Vector2)(this.transform.position - temp.transform.position)).magnitude < distanceToActivate)
+                                {
                                     //pick up wanderer
                                     holding = levelManager.wandererPrefab;//hold wanderer
                                     Destroy(temp);//poosible foreach issues
@@ -176,22 +223,21 @@ public class Player : MonoBehaviour {
                         //try to place robot
                         placeTower();
                     }
-                    else if (holding.GetComponent<WakeUpKit>() != null) {//if holding wakeupKit
-                        Debug.Log("wakeUpKit");
+                    else if (holding.GetComponent<WakeUpKit>() != null)
+                    {//if holding wakeupKit
                         Object[] roaming = Object.FindObjectsOfType(typeof(GameObject));
                         foreach (Object w in roaming)
                         {
                             GameObject temp = (GameObject)w;
                             if (temp.GetComponent<Sleeper>() != null)//check for sleeper
                             {
-                                Debug.Log("sleeper detected");
                                 if (!temp.GetComponent<Tower>().getActive())//check if sleeping
                                 {
-                                    Debug.Log("sleeping detected");
                                     if (((Vector2)(this.transform.position - temp.transform.position)).magnitude < distanceToActivate)//check if in range
                                     {
                                         //wake up tower
                                         holding = null;//delete holding
+                                        animationIndex = -1;
                                         temp.GetComponent<Sleeper>().wake();
                                         playWakeAnimation();
                                     }
@@ -205,7 +251,7 @@ public class Player : MonoBehaviour {
                         foreach (Object w in roaming)
                         {
                             GameObject temp = (GameObject)w;
-                            if (temp.GetComponent<FlowerWatch>() != null)//check for sleeper
+                            if (temp.GetComponent<FlowerWatch>() != null)//check for distracted
                             {
                                 if (!temp.GetComponent<Tower>().getActive())//check if sleeping
                                 {
@@ -214,7 +260,8 @@ public class Player : MonoBehaviour {
                                         //wake up tower
                                         holding = null;//delete holding
                                         temp.GetComponent<FlowerWatch>().wake();
-                                        playWakeAnimation();
+                                        animationIndex = -1;
+                                        playDistractAnimation();
                                     }
                                 }
                             }
@@ -223,6 +270,78 @@ public class Player : MonoBehaviour {
                 }
             }
         }
+
+
+        //check for animations
+        if (playingWakeAnimation)
+        {
+            if (getTime() - lastTime > animationTime)
+            {
+                lastTime = getTime();
+                animationIndex += 1;
+                if (animationIndex >= wakeAnimation[smallDirection].Length)
+                {
+                    mobile = true;
+                    playingWakeAnimation = false;
+                }
+                else
+                {
+                    Debug.Log(smallDirection.ToString()+" "+animationIndex);
+                    spr.sprite = wakeAnimation[smallDirection][animationIndex];
+                }
+            }
+        }
+        else if (playingDistractAnimation)
+        {
+            if (getTime() - lastTime > animationTime)
+            {
+                lastTime = getTime();
+                animationIndex += 1;
+                if (animationIndex >= distractAnimation[direction].Length)
+                {
+                    mobile = true;
+                    playingDistractAnimation = false;
+                }
+                else
+                {
+                    spr.sprite = distractAnimation[direction][animationIndex];
+                }
+            }
+        }
+        else if (moving)
+        {
+            if (getTime() - lastTime > animationTime)
+            {
+                lastTime = getTime();
+                animationIndex += 1;
+                //branch
+                if (holding == null)//holding nothing
+                {
+                    animationIndex %= walkingNone[direction].Length;
+                    spr.sprite = walkingNone[direction][animationIndex];
+                }
+                else//if holding tower air horn or torch
+                {
+                    animationIndex %= walkingCase[direction].Length;
+                    spr.sprite = walkingCase[direction][animationIndex];
+                }
+                
+            }
+        }
+        else//still
+        {
+            if (holding == null)//holding nothing
+            {
+                spr.sprite = stillNone[direction];
+            }
+            else//if holding tower air horn or torch
+            {
+                spr.sprite = stillCase[direction];
+            }
+        }
+    }
+    private void FixedUpdate()
+    {
         
     }
 
@@ -241,106 +360,65 @@ public class Player : MonoBehaviour {
 
     private void pointToVec(Vector2 target)//points the player sprite to face the direction closest to target
     {
+        
         //targetting
         float angle = Vector2.SignedAngle(transform.up, target);
         if (angle < -157.5)
         {
-            if (holding == null)
-            {
-                spr.sprite = stand5;
-            }
-            else
-            {
-                spr.sprite = hold5;
-            }
+            direction = 4;
         }
         else if (angle < -112.5)
         {
-            if (holding == null)
-            {
-                spr.sprite = stand6;
-            }
-            else
-            {
-                spr.sprite = hold6;
-            }
+            direction = 5;
         }
         else if (angle < -67.5)
         {
-            if (holding == null)
-            {
-                spr.sprite = stand7;
-            }
-            else
-            {
-                spr.sprite = hold7;
-            }
+            direction = 6;
         }
         else if (angle < -22.5)
         {
-            if (holding == null)
-            {
-                spr.sprite = stand8;
-            }
-            else
-            {
-                spr.sprite = hold8;
-            }
+            direction = 7;
         }
         else if (angle < 22.5)
         {
-            if (holding == null)
-            {
-                spr.sprite = stand1;
-            }
-            else
-            {
-                spr.sprite = hold1;
-            }
+            direction = 0;
         }
         else if (angle < 67.5)
         {
-            if (holding == null)
-            {
-                spr.sprite = stand2;
-            }
-            else
-            {
-                spr.sprite = hold2;
-            }
+            direction = 1;
         }
         else if (angle < 112.5)
         {
-            if (holding == null)
-            {
-                spr.sprite = stand3;
-            }
-            else
-            {
-                spr.sprite = hold3;
-            }
+            direction = 2;
         }
         else if (angle < 157.5)
         {
-            if (holding == null)
-            {
-                spr.sprite = stand4;
-            }
-            else
-            {
-                spr.sprite = hold4;
-            }
+            direction = 3;
         }
         else
         {
-            if (holding == null)
-            {
-                spr.sprite = stand5;
-            }
-            else
-            {
-                spr.sprite = hold5;
-            }
+            direction = 4;
+        }
+        //find small direction
+        if (angle < -135)
+        {
+            smallDirection = 4;
+        }
+        else if (angle < -75)
+        {
+            smallDirection = 6;
+        }
+        else if (angle < 45)
+        {
+            smallDirection = 0;
+        }
+        else if (angle < 135)
+        {
+            smallDirection = 2;
+        }
+        else
+        {
+            smallDirection = 4;
         }
     }
 
@@ -350,7 +428,7 @@ public class Player : MonoBehaviour {
         playingWakeAnimation = true;
         lastTime = getTime();
         animationIndex = 0;
-        spr.sprite = wakeAnimation[animationIndex];
+        spr.sprite = wakeAnimation[direction][animationIndex];
     }
     private void playDistractAnimation()
     {
@@ -359,7 +437,7 @@ public class Player : MonoBehaviour {
         playingDistractAnimation = true;
         lastTime = getTime();
         animationIndex = 0;
-        spr.sprite = distractAnimation[animationIndex];
+        spr.sprite = distractAnimation[direction][animationIndex];
     }
 
     private float getTime()
