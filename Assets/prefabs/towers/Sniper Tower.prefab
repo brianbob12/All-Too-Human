@@ -370,9 +370,10 @@ MonoBehaviour:
   levelManager: {fileID: 0}
   rangeCollider: {fileID: 58126185834973036}
   bulletSpeed: 0.3
-  fireingRate: 23
-  damage: 10
+  fireingRate: 100
+  damage: 15
   projectile: {fileID: 1588798755167098, guid: 1e31bcd8183b00941a77d2fa719d689c, type: 2}
+  focusDuration: 30
   stand1: {fileID: 21300000, guid: 52af4f041f55aa84da1c39f2a2fe14d4, type: 3}
   stand2: {fileID: 21300000, guid: 68b4d7aa04c9796429343d6663a9c886, type: 3}
   stand3: {fileID: 21300000, guid: cfd0879ec8ed6054caa4ae097504b0de, type: 3}
@@ -381,6 +382,14 @@ MonoBehaviour:
   stand6: {fileID: 21300000, guid: f77e3465501cf1f41a373a5928454920, type: 3}
   stand7: {fileID: 21300000, guid: 9775873f0f88bd84f96ae3cffe2ccb0d, type: 3}
   stand8: {fileID: 21300000, guid: bfa81eb95533dfa4f89dc5eaee419db5, type: 3}
+  focused1: {fileID: 21300000, guid: 8f2a471a67cad394ba15c9356bcd03c6, type: 3}
+  focused2: {fileID: 21300000, guid: 457052aa793be8b4b935996bacf967de, type: 3}
+  focused3: {fileID: 21300000, guid: 938bf2db082962d4aa206834f5fced69, type: 3}
+  focused4: {fileID: 21300000, guid: 718bfc7fe0be3de41ae087678419cd87, type: 3}
+  focused5: {fileID: 21300000, guid: c1b695ab2fac9e84fbb80fe16ac02294, type: 3}
+  focused6: {fileID: 21300000, guid: 04958b9469acbaa4a9706bce286a55bb, type: 3}
+  focused7: {fileID: 21300000, guid: e170729032adb864ba021e401fa90dcb, type: 3}
+  focused8: {fileID: 21300000, guid: f6b4fcf1eb8db424a8b0f4be12c77fcf, type: 3}
   firePoint1: {fileID: 1967132307690714}
   firePoint2: {fileID: 1341422497287022}
   firePoint3: {fileID: 1452040932713110}

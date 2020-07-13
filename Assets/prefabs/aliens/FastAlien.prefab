@@ -93,7 +93,7 @@ MonoBehaviour:
   path: {fileID: 0}
   speed: 0.1
   startingHealth: 10
-  strength: 30
+  strength: 10
   im1: {fileID: 21300000, guid: 624f9fc3102c89748adf7157ddcdb067, type: 3}
   im2: {fileID: 21300000, guid: f327fa6640eae674d8bbaa68db7503e9, type: 3}
   imageChangeInverseFrequency: 30

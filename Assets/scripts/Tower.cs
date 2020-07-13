@@ -12,6 +12,7 @@ public class Tower : MonoBehaviour {
     public int fireingRate=10;//number of fixedUpdates between shots
     public int damage = 0;//damage delt per shot
     public GameObject projectile;//prefab of bullet
+    public float focusDuration = 12;//the ammount of time Adderall has effect
 
     //images
     public Sprite stand1;
@@ -22,6 +23,15 @@ public class Tower : MonoBehaviour {
     public Sprite stand6;
     public Sprite stand7;
     public Sprite stand8;
+
+    public Sprite focused1;
+    public Sprite focused2;
+    public Sprite focused3;
+    public Sprite focused4;
+    public Sprite focused5;
+    public Sprite focused6;
+    public Sprite focused7;
+    public Sprite focused8;
 
     //firePoints
     public GameObject firePoint1;
@@ -40,6 +50,10 @@ public class Tower : MonoBehaviour {
     private float fireingTimer = 0;//logs fixedUPdates since last fired
     protected SpriteRenderer spr;
     private GameObject activeFirePoint;//the source of bullets
+    protected bool focused = false;
+    public bool getFocused() { return focused; }
+    private float focusStart;
+    
 
     //getters and setters}
 
@@ -73,6 +87,12 @@ public class Tower : MonoBehaviour {
     {
         if (active)
         {
+            if (focused)
+            {
+                if (getTime() - focusStart > focusDuration) {
+                    focused = false;
+                }
+            }
             fixedUpdateCall();//for overrideing
         }
         else {
@@ -259,48 +279,124 @@ public class Tower : MonoBehaviour {
         float angle = Vector2.SignedAngle(transform.up, (Vector2)(target.transform.position - transform.position));
         if (angle < -157.5)
         {
-            spr.sprite = stand5;
+            if (focused)
+            {
+                spr.sprite = focused5;
+            }
+            else
+            {
+                spr.sprite = stand5;
+            }
+            
             activeFirePoint = firePoint5;
         }
         else if (angle < -112.5)
         {
-            spr.sprite = stand6;
+            if (focused)
+            {
+                spr.sprite = focused6;
+            }
+            else
+            {
+                spr.sprite = stand6;
+            }
             activeFirePoint = firePoint6;
         }
         else if (angle < -67.5)
         {
-            spr.sprite = stand7;
+            if (focused)
+            {
+                spr.sprite = focused7;
+            }
+            else
+            {
+                spr.sprite = stand7;
+            }
             activeFirePoint = firePoint7;
         }
         else if (angle < -22.5)
         {
-            spr.sprite = stand8;
+            if (focused)
+            {
+                spr.sprite = focused8;
+            }
+            else
+            {
+                spr.sprite = stand8;
+            }
             activeFirePoint = firePoint8;
         }
         else if (angle < 22.5)
         {
-            spr.sprite = stand1;
+            if (focused)
+            {
+                spr.sprite = focused1;
+            }
+            else
+            {
+                spr.sprite = stand1;
+            }
             activeFirePoint = firePoint1;
         }
         else if (angle < 67.5)
         {
-            spr.sprite = stand2;
+            if (focused)
+            {
+                spr.sprite = focused2;
+            }
+            else
+            {
+                spr.sprite = stand2;
+            }
             activeFirePoint = firePoint2;
         }
         else if (angle < 112.5)
         {
-            spr.sprite = stand3;
+            if (focused)
+            {
+                spr.sprite = focused3;
+            }
+            else
+            {
+                spr.sprite = stand3;
+            }
             activeFirePoint = firePoint3;
         }
         else if (angle < 157.5)
         {
-            spr.sprite = stand4;
+            if (focused)
+            {
+                spr.sprite = focused4;
+            }
+            else
+            {
+                spr.sprite = stand4;
+            }
             activeFirePoint = firePoint4;
         }
         else
         {
-            spr.sprite = stand5;
+            if (focused)
+            {
+                spr.sprite = focused5;
+            }
+            else
+            {
+                spr.sprite = stand5;
+            }
             activeFirePoint = firePoint5;
         }
+    }
+
+    public void focus()//give robot adderall
+    {
+        focused = true;
+        focusStart = getTime();
+    }
+    private float getTime()
+    {//returns a float of seconds since jan 1 1970
+
+        float time = (float)((System.DateTime.Now - new System.DateTime(1970, 1, 1)).TotalSeconds - 1594000000);
+        return time;
     }
 }

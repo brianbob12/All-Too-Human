@@ -9,5 +9,14 @@ public class levelLoader : MonoBehaviour {
     public void loadLevel(string name) {
         SceneManager.LoadScene(name, LoadSceneMode.Additive);
         canv.gameObject.active = false;
+        
+    }
+
+    public void closeScene(string name) {
+        SceneManager.UnloadSceneAsync(name);
+    }
+
+    public void quitGame() {
+        Application.Quit();
     }
 }

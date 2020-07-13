@@ -11,3 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/levels/testingLevel.unity
     guid: 042edbada5d4b07458bb5e5e38e9ebe4
+  - enabled: 1
+    path: Assets/levels/tutorial.unity
+    guid: c075383475e9f204b8222dd2459fb12a

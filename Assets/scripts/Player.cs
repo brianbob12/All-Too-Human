@@ -10,9 +10,11 @@ public class Player : MonoBehaviour {
     public GameObject airHorns;
     public GameObject trashCan;
 
+
     //thease are just templates with releavant components
     public GameObject torch;
     public GameObject airHorn;
+    public GameObject adderall;
 
     public CircleCollider2D fatCollider;//a collider that is only active when holding something
 
@@ -210,8 +212,18 @@ public class Player : MonoBehaviour {
                                 {
                                     //pick up wanderer
                                     holding = levelManager.wandererPrefab;//hold wanderer
-                                    Destroy(temp);//poosible foreach issues
+                                    Destroy(temp);
+                                    break;
                                 }
+                            }
+                        }
+                        else if (temp.GetComponent<Adderall>() != null)
+                        {
+                            if (((Vector2)(this.transform.position - temp.transform.position)).magnitude < distanceToActivate)
+                            {
+                                holding = adderall;
+                                Destroy(temp);
+                                break;
                             }
                         }
                     }
@@ -240,6 +252,7 @@ public class Player : MonoBehaviour {
                                         animationIndex = -1;
                                         temp.GetComponent<Sleeper>().wake();
                                         playWakeAnimation();
+                                        break;
                                     }
                                 }
                             }
@@ -262,7 +275,27 @@ public class Player : MonoBehaviour {
                                         temp.GetComponent<FlowerWatch>().wake();
                                         animationIndex = -1;
                                         playDistractAnimation();
+                                        break;
                                     }
+                                }
+                            }
+                        }
+                    }
+                    else if (holding.GetComponent<Adderall>() != null)
+                    {
+                        Object[] roaming = Object.FindObjectsOfType(typeof(GameObject));
+                        foreach (Object w in roaming)
+                        {
+                            GameObject temp = (GameObject)w;
+                            if (temp.GetComponent<Tower>() != null)
+                            {//detected tower
+                                //check range
+                                if (((Vector2)(this.transform.position - temp.transform.position)).magnitude < distanceToActivate && temp.GetComponent<Tower>().getActive())//check if in range and active
+                                {
+                                    //give adderolll
+                                    holding = null;
+                                    temp.GetComponent<Tower>().focus();
+                                    break;
                                 }
                             }
                         }
@@ -270,7 +303,7 @@ public class Player : MonoBehaviour {
                 }
             }
         }
-
+       
 
         //check for animations
         if (playingWakeAnimation)
