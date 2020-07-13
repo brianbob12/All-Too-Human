@@ -34,6 +34,8 @@ public class LevelManager : MonoBehaviour {
     //UI objects
     public Text holdingText;
     public Text moneyText;
+    public Text livesText;
+    public Text wavesText;
     public Image DeathScreen;
     public GameObject GameOver;
     public GameObject storeMenu;
@@ -80,6 +82,8 @@ public class LevelManager : MonoBehaviour {
         if (lives == 0) {
             //endgame
             GameOver.SetActive(true);
+            pause = true;
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 
@@ -140,7 +144,8 @@ public class LevelManager : MonoBehaviour {
         else {
             holdingText.text = "Not Holding Anything";
         }
-
+        livesText.text = lives.ToString() + " Lives";
+        wavesText.text = "Wave " + wave.ToString() + " of " + waveLimit.ToString(); ;
         moneyText.text = "$" + money.ToString();
 	}
 
@@ -272,7 +277,7 @@ public class LevelManager : MonoBehaviour {
         return time;
     }
 
-    private void spawn(GameObject enemy) {//spawns at first node in path
+    public void spawn(GameObject enemy) {//spawns at first node in path
         Enemy placed = Instantiate(enemy, path.getPathNode(0).transform.position, Quaternion.identity).GetComponent<Enemy>();
         //setup
         placed.levelManager = this;

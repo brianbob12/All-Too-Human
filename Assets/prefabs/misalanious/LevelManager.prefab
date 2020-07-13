@@ -9,17 +9,19 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1559333156491896}
+  m_RootGameObject: {fileID: 1868249206109236}
   m_IsPrefabParent: 1
---- !u!1 &1559333156491896
+--- !u!1 &1868249206109236
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4512852891024978}
-  - component: {fileID: 114817354509587084}
+  - component: {fileID: 4966150637438284}
+  - component: {fileID: 114042824345929070}
+  - component: {fileID: 114875603287011396}
+  - component: {fileID: 114524564026496212}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -27,12 +29,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4512852891024978
+--- !u!4 &4966150637438284
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1559333156491896}
+  m_GameObject: {fileID: 1868249206109236}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -40,26 +42,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114817354509587084
+--- !u!114 &114042824345929070
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1559333156491896}
+  m_GameObject: {fileID: 1868249206109236}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06a3aac173290fb489ac4fd4eaff91d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   difficulty: 1
-  startingLives: 2
+  startingLives: 20
   startingMoney: 150
   priceOfWanderer: 100
   priceOfSniper: 200
   priceOfWhacker: 75
   priceOfTeen: 100
   waveCooldown: 13
-  waveLimit: 3
+  waveLimit: 7
   player: {fileID: 0}
   enemy1: {fileID: 1060753357437596, guid: 228df9af8ee898b4a95c55a08d4551f3, type: 2}
   enemy2: {fileID: 1663247951715870, guid: d591784c1daa1e24c9a75c63b576994a, type: 2}
@@ -72,8 +74,38 @@ MonoBehaviour:
   whackerPrefab: {fileID: 1880312437926886, guid: 96a0f47f6e5753b4a9011f97e882ade8,
     type: 2}
   teenPrefab: {fileID: 0}
-  livesText: {fileID: 0}
+  holdingText: {fileID: 0}
   moneyText: {fileID: 0}
+  livesText: {fileID: 0}
+  wavesText: {fileID: 0}
   DeathScreen: {fileID: 0}
   GameOver: {fileID: 0}
   storeMenu: {fileID: 0}
+--- !u!114 &114524564026496212
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1868249206109236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7615840932b927d4ebd1972041a0c680, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canv: {fileID: 0}
+--- !u!114 &114875603287011396
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1868249206109236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5cbe2c08a5ffd741b38819a3041c1ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeDelayUpper: 40
+  timeDelayLower: 15
+  template: {fileID: 1513926927593748, guid: 38d1e38f0417cf144835ea7252ff51f1, type: 2}
+  lifeTime: 12
+  onlySpawnAfterWave: 5

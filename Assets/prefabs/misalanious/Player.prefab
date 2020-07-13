@@ -200,12 +200,16 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1901ef1f29742954f83f1868aebbd7a1, type: 3}
   - {fileID: 21300000, guid: 8369bdc9dc785994da452157ddf50300, type: 3}
   - {fileID: 21300000, guid: 915d27fbf86d639489719cde35150168, type: 3}
+  - {fileID: 21300000, guid: 8369bdc9dc785994da452157ddf50300, type: 3}
+  - {fileID: 21300000, guid: 915d27fbf86d639489719cde35150168, type: 3}
   wake2:
   - {fileID: 21300000, guid: 2c9a8049cdb30c04d8d59742906aaea8, type: 3}
   - {fileID: 21300000, guid: 6c2083bf90007a044b69f68015aaf306, type: 3}
   - {fileID: 21300000, guid: a1cf84675c05a4d48947e5550924124d, type: 3}
   wake3:
   - {fileID: 21300000, guid: 2c9a8049cdb30c04d8d59742906aaea8, type: 3}
+  - {fileID: 21300000, guid: 6c2083bf90007a044b69f68015aaf306, type: 3}
+  - {fileID: 21300000, guid: a1cf84675c05a4d48947e5550924124d, type: 3}
   - {fileID: 21300000, guid: 6c2083bf90007a044b69f68015aaf306, type: 3}
   - {fileID: 21300000, guid: a1cf84675c05a4d48947e5550924124d, type: 3}
   wake4:
@@ -216,12 +220,16 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5a435779afe73644288455be538967c3, type: 3}
   - {fileID: 21300000, guid: a17707f9fa0b215419d5dabee2993255, type: 3}
   - {fileID: 21300000, guid: 04407a0ca7ad206408249ab606d08132, type: 3}
+  - {fileID: 21300000, guid: a17707f9fa0b215419d5dabee2993255, type: 3}
+  - {fileID: 21300000, guid: 04407a0ca7ad206408249ab606d08132, type: 3}
   wake6:
   - {fileID: 21300000, guid: 185ec8ece80d0c54f9291e9475d88f5a, type: 3}
   - {fileID: 21300000, guid: 2c8fe35028e565a4ba9ab10d52991ffe, type: 3}
   - {fileID: 21300000, guid: 5beadc42211c97549b29ceb7bcf72cac, type: 3}
   wake7:
   - {fileID: 21300000, guid: 185ec8ece80d0c54f9291e9475d88f5a, type: 3}
+  - {fileID: 21300000, guid: 2c8fe35028e565a4ba9ab10d52991ffe, type: 3}
+  - {fileID: 21300000, guid: 5beadc42211c97549b29ceb7bcf72cac, type: 3}
   - {fileID: 21300000, guid: 2c8fe35028e565a4ba9ab10d52991ffe, type: 3}
   - {fileID: 21300000, guid: 5beadc42211c97549b29ceb7bcf72cac, type: 3}
   wake8:

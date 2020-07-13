@@ -20,7 +20,8 @@ public class Store : MonoBehaviour {
     void Start () {
         spr = GetComponent<SpriteRenderer>();
         lastTime = getTime();
-	}
+        
+    }
 
     // Update is called once per frame
     void Update()

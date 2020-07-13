@@ -403,7 +403,7 @@ MonoBehaviour:
   fireingRate: 30
   damage: 5
   projectile: {fileID: 1588798755167098, guid: 1e31bcd8183b00941a77d2fa719d689c, type: 2}
-  focusDuration: 12
+  focusDuration: 30
   stand1: {fileID: 21300000, guid: 46ddd67ceb0ac0647b061d53fe0c9739, type: 3}
   stand2: {fileID: 21300000, guid: 9745c9b80914633438309199f407cafb, type: 3}
   stand3: {fileID: 21300000, guid: a87f5dcaff665f34da56cc2c332ce3ca, type: 3}

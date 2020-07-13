@@ -44,11 +44,7 @@ public class Wanderer : MonoBehaviour {
         {
             if (Random.Range(0, wanderRate)<1&&!tower.getFocused())
             {
-                tower.setActive(false);
-                distract();
-                lastTime = getTime();
-                animationIndex = -1;
-                rb.constraints = RigidbodyConstraints2D.None|RigidbodyConstraints2D.FreezeRotation;
+                startDistraction();
             }
             if (tower.getTarget() == null)
             {
@@ -69,6 +65,15 @@ public class Wanderer : MonoBehaviour {
             }
             
         }
+    }
+
+    public void startDistraction()
+    {
+        tower.setActive(false);
+        distract();
+        lastTime = getTime();
+        animationIndex = -1;
+        rb.constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
     }
 
     protected void distract() {

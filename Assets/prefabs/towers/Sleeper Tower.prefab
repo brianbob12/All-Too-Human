@@ -149,9 +149,9 @@ MonoBehaviour:
   rangeCollider: {fileID: 58427052567802626}
   bulletSpeed: 0
   fireingRate: 60
-  damage: 15
+  damage: 20
   projectile: {fileID: 0}
-  focusDuration: 12
+  focusDuration: 30
   stand1: {fileID: 21300000, guid: b315a5c7eb8f3614c9861a0e5fdb2f0d, type: 3}
   stand2: {fileID: 0}
   stand3: {fileID: 0}

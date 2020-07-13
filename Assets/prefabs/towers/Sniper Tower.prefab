@@ -370,10 +370,10 @@ MonoBehaviour:
   levelManager: {fileID: 0}
   rangeCollider: {fileID: 58126185834973036}
   bulletSpeed: 0.3
-  fireingRate: 23
-  damage: 10
+  fireingRate: 100
+  damage: 15
   projectile: {fileID: 1588798755167098, guid: 1e31bcd8183b00941a77d2fa719d689c, type: 2}
-  focusDuration: 12
+  focusDuration: 30
   stand1: {fileID: 21300000, guid: 52af4f041f55aa84da1c39f2a2fe14d4, type: 3}
   stand2: {fileID: 21300000, guid: 68b4d7aa04c9796429343d6663a9c886, type: 3}
   stand3: {fileID: 21300000, guid: cfd0879ec8ed6054caa4ae097504b0de, type: 3}

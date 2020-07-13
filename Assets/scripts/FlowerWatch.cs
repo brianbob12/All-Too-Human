@@ -34,6 +34,9 @@ public class FlowerWatch : MonoBehaviour {
                 spr.sprite = anim[animationIndex];
             }
         }
+        else if(tow.getFocused()&&tow.getTarget()==null){
+            spr.sprite = tow.focused7;
+        }
 	}
 
     private void FixedUpdate()
@@ -57,7 +60,7 @@ public class FlowerWatch : MonoBehaviour {
         tow.setActive(true);
     }
 
-    private void distract()
+    public void distract()
     {
         playingAnimation = true;
         tow.setActive(false);
